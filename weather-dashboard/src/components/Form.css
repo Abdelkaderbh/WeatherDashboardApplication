@@ -10,3 +10,9 @@
     margin: 0 10px;
   }
   
+
+/* Card Container */
+.weather-card {
+  margin-top: 80px;
+  margin-left: 80px;
+}
