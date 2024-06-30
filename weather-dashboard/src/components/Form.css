@@ -1,0 +1,12 @@
+/* inpput container */
+.inputs-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .inputs-container > * {
+    margin: 0 10px;
+  }
+  
