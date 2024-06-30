@@ -9,7 +9,7 @@ import './Form.css';
 
 const WeatherForm: React.FC = () => {
   const [coordinates, setCoordinates] = useState<{ latitude: number; longitude: number } | null>(null);
-
+  const [unit, setUnit] = useState<string>('celsius');
   const { weather, loading, error, getWeatherData } = useWeatherData();
 
   const handleCoordinatesChange = useCallback((coords: { latitude: number; longitude: number }) => {
@@ -17,10 +17,14 @@ const WeatherForm: React.FC = () => {
     console.log('Fetched coordinates:', coords);
   }, []);
 
+  const handleUnitChange = (selectedUnit: string) => {
+    setUnit(selectedUnit);
+  };
+
   const handleFetchWeather = () => {
     if (coordinates) {
       const { latitude, longitude } = coordinates;
-      getWeatherData(latitude, longitude, 'celsius', 7);
+      getWeatherData(latitude, longitude, unit, 7);
     }
   };
 
@@ -28,14 +32,14 @@ const WeatherForm: React.FC = () => {
     <>
       <div className="inputs-container">
         <CityInput onCoordinatesChange={handleCoordinatesChange}  />
-        <UnitDropDown />
+        <UnitDropDown selectedUnit={unit} onUnitChange={handleUnitChange} />
         <DaysInput />
         <Button label="Search" icon="pi pi-search" onClick={handleFetchWeather} />
       </div>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       <div className="weather-card">
-        <WeatherCard weather={weather} />
+        <WeatherCard weather={weather} unit={unit} />
       </div>
     </>
   );

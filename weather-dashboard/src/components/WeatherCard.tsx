@@ -5,9 +5,10 @@ import "./weatherCard.css";
 
 interface WeatherCardProps {
   weather: WeatherData | null;
+  unit:string;
 }
 
-const WeatherCard: React.FC<WeatherCardProps> = ({ weather }) => {
+const WeatherCard: React.FC<WeatherCardProps> = ({ weather,unit  }) => {
   const CardStyle = () => {
     if (weather && weather.isDay) {
       return { width: "20%", backgroundColor: "#b3e5fc", color: "#fff" };
@@ -31,7 +32,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ weather }) => {
             ></i>
           )}
           <div className="text">
-            <p>Temperature: {weather.temperature} °C</p>
+            <p>Temperature: {weather.temperature} °{unit === 'celsius' ? 'C' : 'F'} </p>
             <p>Wind Speed: {weather.windSpeed} km/h </p>
             <p>Humidity : {weather.humidity} % </p>
             <p> Rain : {weather.rain} m/s </p>
